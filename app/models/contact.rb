@@ -7,4 +7,8 @@ class Contact < ApplicationRecord
   def fullname
     firstname + " " + lastname
   end
+
+  def self.by_letter(letter)
+    where("lastname LIKE ?", "#{letter}%").order(:lastname)
+  end
 end

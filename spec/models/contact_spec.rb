@@ -51,4 +51,20 @@ RSpec.describe Contact, type: :model do
     expect(contact.fullname).to eq("Joe Black")
   end
 
+  it "returns a sorted array of result that match a character" do
+    @smith = Contact.create(
+        firstname: 'John',
+        lastname: 'Smith',
+        email: 'jsmith@example.com')
+    @jones = Contact.create(
+        firstname: 'Tim',
+        lastname: 'Jones',
+        email: 'tjones@example.com')
+    @johnson = Contact.create(
+        firstname: 'John',
+        lastname: 'Johnson',
+        email: 'jjohnson@example.com')
+    expect(Contact.by_letter("J")).to eq [@johnson, @jones]
+  end
+
 end
