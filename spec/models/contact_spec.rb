@@ -2,6 +2,10 @@ require 'rails_helper'
 
 RSpec.describe Contact, type: :model do
   # pending "add some examples to (or delete) #{__FILE__}"
+  it "has a valid factory" do
+    expect(build(:contact)).to be_valid
+  end
+
   it "is valid with firstname, lastname, and email" do
     contact = Contact.new(
                           firstname: "Joe",
@@ -12,19 +16,19 @@ RSpec.describe Contact, type: :model do
   end
 
   it "is invalid without firstname" do
-    contact = Contact.new(firstname: nil)
+    contact = build(:contact, firstname: nil)
     contact.valid?
     expect(contact.errors[:firstname]).to include("can't be blank")
   end
 
   it "is invalid without lastname" do
-    contact = Contact.new(lastname: nil)
+    contact = build(:contact, lastname: nil)
     contact.valid?
     expect(contact.errors[:lastname]).to include("can't be blank")
   end
 
   it "is invalid without email" do
-    contact = Contact.new(email: nil)
+    contact = build(:contact, email: nil)
     contact.valid?
     expect(contact.errors[:email]).to include("can't be blank")
   end
